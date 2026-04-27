@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUTRI NAYLA - Portfolio Mahasiswa Teknik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #333; overflow: hidden; height: 100vh; }
+
+        /* Latar Belakang Baby Blue */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #89CFF0; /* Warna Baby Blue */
+            z-index: -2;
+        }
+
+        /* Navbar Tetap Sesuai Desain */
+        .navbar { position: fixed; top: 0; width: 100%; padding: 1rem 5%; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #fff; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-link { color: #fff; text-decoration: none; font-weight: 500; cursor: pointer; }
+
+        /* Slide Container */
+        .slide-container { height: 100vh; width: 100%; position: relative; }
+        .section { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            display: none; align-items: center; justify-content: center; 
+            padding: 80px 5%; opacity: 0; transition: opacity 0.5s ease;
+        }
+        .section.active { display: flex; opacity: 1; }
+        .container { max-width: 1200px; width: 100%; margin: 0 auto; }
+
+        /* Tampilan Putih untuk Konten (Sesuai Desain Awal) */
+        .white-bg-content { 
+            background: white; padding: 50px; border-radius: 30px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%;
+        }
+
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 2rem; color: #1e293b; }
+
+        /* Hero Section */
+        .hero { text-align: center; color: white; flex-direction: column; }
+        .profile-pic { width: 180px; height: 180px; border-radius: 50%; margin-bottom: 20px; border: 4px solid white; object-fit: cover; }
+
+        /* Biodata & Timeline */
+        .biodata-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .info-box { background: #f8fafc; padding: 15px; border-radius: 10px; border-left: 5px solid #89CFF0; text-align: left; }
+        .timeline-item { padding: 10px 20px; border-left: 2px solid #89CFF0; position: relative; margin-left: 20px; text-align: left; }
+
+        /* Skill & Project Cards */
+        .skills-grid, .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .skill-item { background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.4); }
+        .skill-bar { height: 8px; background: rgba(0,0,0,0.1); border-radius: 4px; margin-top: 10px; }
+        .skill-per { height: 100%; background: #1e293b; border-radius: 4px; }
+        
+        .card { background: #f8fafc; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .project-btn { margin-top: 15px; display: inline-block; padding: 8px 20px; background: #89CFF0; color: white; text-decoration: none; border-radius: 10px; }
+
+        /* Tombol Navigasi Seterusnya */
+        .nav-buttons { position: absolute; bottom: 40px; left: 0; width: 100%; display: flex; justify-content: center; gap: 20px; z-index: 10; }
+        .btn-next, .btn-prev { 
+            background: #1e293b; color: white; border: none; padding: 12px 30px; 
+            border-radius: 30px; cursor: pointer; font-weight: 600; transition: 0.3s;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .btn-next:hover { background: #334155; transform: translateX(5px); }
+        .btn-prev:hover { background: #334155; transform: translateX(-5px); }
+
+        footer { position: absolute; bottom: 0; width: 100%; color: #1e293b; text-align: center; padding: 10px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Putri Nayla</div>
+            <ul class="nav-menu">
+                <li onclick="showSlide(0)" class="nav-link">Home</li>
+                <li onclick="showSlide(1)" class="nav-link">Biodata</li>
+                <li onclick="showSlide(2)" class="nav-link">Skill</li>
+                <li onclick="showSlide(3)" class="nav-link">Proyek</li>
+                <li onclick="showSlide(4)" class="nav-link">Kontak</li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="slide-container">
+        <section id="home" class="section active hero">
+            <div class="container" style="text-align: center;">
+                <img src="https://i.pinimg.com/736x/87/b9/f1/87b9f10213ad7695101b80149e989347.jpg" alt="Profile" class="profile-pic">
+                <h1 style="font-size: 3rem; margin-bottom: 10px;">Putri Nayla</h1>
+                <p style="font-size: 1.2rem;">Mahasiswa Teknik Informatika | Tech Enthusiast</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-next" onclick="nextSlide()">Seterusnya <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <div class="white-bg-content">
+                    <h2 class="section-title">Biodata & Pendidikan</h2>
+                    <div class="biodata-grid">
+                        <div class="info-box"><strong><i class="fas fa-user"></i> Nama:</strong><br>Putri Nayla</div>
+                        <div class="info-box"><strong><i class="fas fa-map-marker-alt"></i> Lokasi:</strong><br>Batee, Pidie, Aceh</div>
+                        <div class="info-box"><strong><i class="fas fa-envelope"></i> Email:</strong><br>nayputri692@email.com</div>
+                        <div class="info-box"><strong><i class="fas fa-graduation-cap"></i> Status:</strong><br>Mahasiswi IT</div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item"><strong>Univ. Jabal Ghafur</strong><br>S1 Teknik Informatika (2023 - Sekrng)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevSlide()"><i class="fas fa-arrow-left"></i> Kembali</button>
+                <button class="btn-next" onclick="nextSlide()">Seterusnya <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title" style="color: #1e293b;">Keahlian IT</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="fab fa-html5 fa-2x"></i> <h4>HTML & CSS</h4>
+                        <div class="skill-bar"><div class="skill-per" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-js fa-2x"></i> <h4>JavaScript</h4>
+                        <div class="skill-bar"><div class="skill-per" style="width: 70%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-paint-brush fa-2x"></i> <h4>UI/UX Design</h4>
+                        <div class="skill-bar"><div class="skill-per" style="width: 75%;"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevSlide()"><i class="fas fa-arrow-left"></i> Kembali</button>
+                <button class="btn-next" onclick="nextSlide()">Seterusnya <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="white-bg-content">
+                    <h2 class="section-title">Portofolio Proyek</h2>
+                    <div class="cards-grid">
+                        <div class="card">
+                            <i class="fas fa-shopping-cart fa-2x" style="color:#89CFF0"></i>
+                            <h3>TrendWear Store</h3>
+                            <p>E-commerce fashion otomatis.</p>
+                            <a href="https://nayputri692-cloud.github.io/Fasion/" class="project-btn">Lihat</a>
+                        </div>
+                        <div class="card">
+                            <i class="fas fa-hands-wash fa-2x" style="color:#89CFF0"></i>
+                            <h3>Kebersihan Sekolah</h3>
+                            <p>Edukasi lingkungan hidup.</p>
+                            <a href="https://nayputri692-cloud.github.io/bersih/" class="project-btn">Lihat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevSlide()"><i class="fas fa-arrow-left"></i> Kembali</button>
+                <button class="btn-next" onclick="nextSlide()">Seterusnya <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Informasi Kontak</h2>
+                <div class="cards-grid">
+                    <div class="card" style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fas fa-envelope-open-text fa-2x" style="color: #89CFF0;"></i>
+                        <div style="text-align: left;"><strong>Email:</strong><br>nayputri692@email.com</div>
+                    </div>
+                    <div class="card" style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fab fa-instagram fa-2x" style="color: #e1306c;"></i>
+                        <div style="text-align: left;"><strong>Instagram:</strong><br>@putry_nayy</div>
+                    </div>
+                    <div class="card" style="display: flex; align-items: center; gap: 20px;">
+                        <i class="fab fa-whatsapp fa-2x" style="color: #e1306c;"></i>
+                        <div style="text-align: left;"><strong>whatsapp:</strong><br>+6282268464512</div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" onclick="prevSlide()"><i class="fas fa-arrow-left"></i> Kembali</button>
+                <button class="btn-next" onclick="showSlide(0)">Ulangi <i class="fas fa-redo"></i></button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Putri Nayla. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.section');
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+    </script>
+</body>
+</html>
